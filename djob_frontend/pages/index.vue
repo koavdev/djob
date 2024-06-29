@@ -1,3 +1,9 @@
+<script setup>
+
+    const { data: jobs } = await useFetch('http://localhost:8000/api/v1/jobs/newest/')
+    console.log(jobs.value)
+</script>
+
 <template>
     <div>
         <div class="py-20 px-6 bg-teal-700 text-center">
@@ -12,9 +18,10 @@
 
             <div class="space-y-4">
 
-                <Job />
-                <Job />
-                <Job />
+                <Job
+                    v-for="job in jobs"
+                    v-bind:key="job.id"
+                    v-bind:job="job"/>
                 
             </div>
 
