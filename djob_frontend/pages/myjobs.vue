@@ -14,6 +14,12 @@ onMounted(() => {
   }
 })
 
+useSeoMeta({
+    title: 'My jobs',
+    ogTitle: 'My jobs',
+    description: 'The description'
+})
+
 async function getJobs() {
     $fetch('http://localhost:8000/api/v1/jobs/my', {
         headers: {
