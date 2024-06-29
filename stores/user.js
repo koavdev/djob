@@ -6,7 +6,7 @@ export const useUserStore = defineStore({
         user: {
             isAuthenticated: false,
             email: null,
-            token: normalizeModuleTranspilePath,
+            token: null,
         },
     }),
 
