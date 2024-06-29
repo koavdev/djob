@@ -10,7 +10,13 @@
         <div class="py-10 px-6">
             <h2 class="mb-8 text-2xl text-center">Newest jobs</h2>
 
-            
+            <div class="space-y-4">
+
+                <Job />
+                <Job />
+                <Job />
+                
+            </div>
 
             
         </div>
