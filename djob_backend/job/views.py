@@ -2,7 +2,15 @@ from rest_framework import status, authentication, permissions
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from .models import Job, Category
-from .serializers import JobSerializer, JobDetailSerializer
+from .serializers import JobSerializer, JobDetailSerializer, CategorySerializer
+
+
+class CategoriesView(APIView):
+    def get(self, request, format=None):
+        categories = Category.objects.all()
+        serializer = CategorySerializer(categories, many=True)
+
+        return Response(serializer.data)
 
 class NewestJobsView(APIView):
     def get(self, request, format=None):

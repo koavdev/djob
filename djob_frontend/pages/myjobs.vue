@@ -4,9 +4,6 @@
 
         <div class="space-y-4">
                 <Job :my="true"/>
-                <Job :my="true"/>
-                <Job :my="true"/>
-
             </div>
     </div>
 </template>
