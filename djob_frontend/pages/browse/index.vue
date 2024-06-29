@@ -1,8 +1,35 @@
 <script setup>
+
+
 // Categories
 
 const { data: jobCategories } = await useFetch('http://localhost:8000/api/v1/jobs/categories/')
-console.log(jobCategories)
+
+let selectedCategoriesRef = ref('')
+let selectedCategories = []
+
+function toggleCategory(id) {
+    const index = selectedCategories.indexOf(id)
+
+    if (index === -1) {
+        selectedCategories.push(id)
+    } else {
+        selectedCategories.splice(index, 1)
+    }
+
+    console.log('toggleCategory', selectedCategories.join(','))
+
+    selectedCategoriesRef.value = selectedCategories.join(',')
+}
+
+//
+
+let {data: jobs} = await useFetch('http://localhost:8000/api/v1/jobs/', {
+    query: {
+        categories: selectedCategoriesRef
+    }
+})
+
 
 </script>
 
@@ -28,6 +55,8 @@ console.log(jobCategories)
                  <p 
                     v-for="category in jobCategories"
                     v-bind:key="category.id"
+                    v-on:click="$event => toggleCategory(category.id)"
+                    v-bind:class="{'bg-teal-900': selectedCategoriesRef.includes(category.id)}"
                     class="py-4 px-6 text-white rounded-xl"
                 >
                     {{ category.title }}
@@ -38,7 +67,10 @@ console.log(jobCategories)
 
         <div class="md:col-span-3">
             <div class="space-y-4">
-
+                <Job 
+                    v-for="job in jobs"
+                    v-bind:key="job.id"
+                    v-bind:job="job"/>
             </div>
         </div>
     </div>
