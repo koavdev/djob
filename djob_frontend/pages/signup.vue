@@ -4,7 +4,7 @@ const router = useRouter()
 let email = ref('')
 let password1 = ref('')
 let password2 = ref('')
-let errors = ref({})
+let errors = ref([])
 
 async function submitForm() {
     console.log('submitForm')
