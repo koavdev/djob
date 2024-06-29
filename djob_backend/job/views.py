@@ -23,9 +23,14 @@ class BrowseJobsView(APIView):
     def get(self, request, format=None):
         jobs = Job.objects.all()
         categories = request.GET.get('categories', '')
+        query = request.GET.get('query', '')
+
+        if query:
+            jobs = jobs.filter(title__icontains=query)
 
         if categories:
             jobs = jobs.filter(category_id__in=categories.split(','))
+        
         serializer = JobSerializer(jobs, many=True)
 
         return Response(serializer.data)
