@@ -1,3 +1,10 @@
+<script setup>
+const props = defineProps({
+    my: {
+        type: [Boolean]
+    }
+})
+</script>
 
 <template>
     <div class="p-6 flex items-center justify-between bg-gray-100 rounded-xl">
