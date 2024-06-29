@@ -18,6 +18,17 @@ class NewestJobsView(APIView):
         serializer = JobSerializer(jobs, many=True)
 
         return Response(serializer.data)
+    
+class BrowseJobsView(APIView):
+    def get(self, request, format=None):
+        jobs = Job.objects.all()
+        categories = request.GET.get('categories', '')
+
+        if categories:
+            jobs = jobs.filter(category_id__in=categories.split(','))
+        serializer = JobSerializer(jobs, many=True)
+
+        return Response(serializer.data)
 
 class JobsDetailView(APIView):
     def get(self, request, pk, format=None):
